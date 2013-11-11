@@ -21,6 +21,9 @@ gov.usgs.quakesUrl = 'https://soda.demo.socrata.com/resource/earthquakes.json?$$
 //current earthquake dataset (array of objects, each representing an earthquake)
 gov.usgs.quakes;
 
+//global reference to infowindow
+gov.usgs.iw;
+
 //reference to our google map
 gov.usgs.quakesMap;
 
@@ -94,9 +97,10 @@ function addQuakeMarkers(quakes, map) {
 
 function registerInfoWindow(map, marker, infoWindow) {
     google.maps.event.addListener(marker, 'click', function(){
-
+    	if (gov.usgs.iw)
+    		gov.usgs.iw.close();
+    	gov.usgs.iw = infoWindow;
         infoWindow.open(map, marker);
-
     });                
 } //registerInfoWindow()
 
